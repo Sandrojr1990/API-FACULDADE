@@ -7,7 +7,7 @@ const repoTurma = AppDataSource.getRepository(Turma);
 
 @Controller("/faculdade")
 
-export class FaculdadeController {
+export default class FaculdadeController {
 
   @StatusResponse(200, "Turma criada com sucesso")
   @StatusResponse(400, "Erro ao criar turma")

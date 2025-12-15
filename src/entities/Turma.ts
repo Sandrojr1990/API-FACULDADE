@@ -16,13 +16,18 @@ export class Turma {
 
     nome!: string;
 
-    @Column()
-      semestre!: string;
+    @Column({
+        type: "varchar",
+        length: 100,
+        nullable: false
+    })
+    semestre!: string;
 
-    
-
-    @Column()
-        id_disciplina!: number;
+    @Column({
+        type: "integer",
+        nullable: false
+    })
+    id_disciplina!: number;
     
     
 }
