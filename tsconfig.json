@@ -11,7 +11,8 @@
     "lib": ["ES2020"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "types": [],
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -21,7 +22,6 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,

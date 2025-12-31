@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, Put, StatusResponse } from "express-swagge
 import { Request, Response } from "express";
 import { AppDataSource } from "../database";
 import { Turma } from "../entities/Turma";
+import { TurmaDto } from "../dto/Turma.dto";
 
 const repoTurma = AppDataSource.getRepository(Turma);
 
@@ -11,13 +12,7 @@ export default class FaculdadeController {
 
   @StatusResponse(200, "Turma criada com sucesso")
   @StatusResponse(400, "Erro ao criar turma")
-  @Body({
-      nome: "Nome da Turma",
-      semestre: "Semestre da Turma",
-      id_disciplina: "ID da Disciplina"
-
-  })
-
+  @Body(TurmaDto)
   @Post("/turma")
 
     async criarTurma(request: Request, response: Response): Promise<Response> {

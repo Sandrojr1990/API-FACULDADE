@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import "dotenv/config";
 import { Turma } from "./entities/Turma";
+import { User } from "./entities/User";
 
 if (
   !process.env.DB_HOST ||
@@ -22,5 +23,5 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   synchronize: true,
-  entities: [Turma],
-});
+  entities: [Turma, User]
+})
