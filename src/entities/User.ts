@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 
 @Entity()
 export class User {
-    
+
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -12,7 +12,7 @@ export class User {
     @Column({ type: "varchar", length: 100, unique: true })
     email!: string;
 
-    @Column({ type: "varchar", length: 250 })
+    @Column({ type: "varchar", length: 255 })
     senha!: string;
 
     @CreateDateColumn()

@@ -1,17 +1,20 @@
-import { Body, Controller, Post } from "express-swagger-autoconfigure";
+import { Body, Controller, Post, StatusResponse } from "express-swagger-autoconfigure";
 import { Request, Response } from "express";
 import { AppDataSource } from "../database";
 import { User } from "../entities/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { UserDto } from "../dto/User.dto";
+import { LoginDto} from "../dto/Login.dto";
 
 const repoUser = AppDataSource.getRepository(User);
 
 @Controller("/auth")
 export class AuthController {
 
-    @Body(UserDto)
+    @StatusResponse(201, "Usuário registrado com sucesso")
+    @StatusResponse(400, "Erro ao registrar usuário")
+    @Body(UserDto) 
     @Post("/registro")
     async registro(request: Request, response: Response):Promise<Response> {
         const { name, email, senha } = request.body;
@@ -43,6 +46,9 @@ export class AuthController {
 
     }
 
+    @StatusResponse(200, "Usuário registrado com sucesso")
+    @StatusResponse(400, "Erro ao registrar usuário")
+    @Body(LoginDto)
     @Post("/login")
     async login(request: Request, response: Response):Promise<Response> {
         try {
@@ -73,7 +79,7 @@ export class AuthController {
                  message: "Login realizado com sucesso",
                  token,
                  user: userResponse
-                 
+
             });
 
 

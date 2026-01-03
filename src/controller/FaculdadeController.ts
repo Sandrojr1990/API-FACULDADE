@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { AppDataSource } from "../database";
 import { Turma } from "../entities/Turma";
 import { TurmaDto } from "../dto/Turma.dto";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const repoTurma = AppDataSource.getRepository(Turma);
 
@@ -12,8 +13,9 @@ export default class FaculdadeController {
 
   @StatusResponse(200, "Turma criada com sucesso")
   @StatusResponse(400, "Erro ao criar turma")
+  @StatusResponse(401, "Não autenticado")
   @Body(TurmaDto)
-  @Post("/turma")
+  @Post("/turma", authMiddleware)
 
     async criarTurma(request: Request, response: Response): Promise<Response> {
         const { nome, semestre, id_disciplina } = request.body;
@@ -36,6 +38,7 @@ export default class FaculdadeController {
 
     @StatusResponse(200, "Turma atualizada com sucesso")
     @StatusResponse(400, "Erro ao atualizar turma")
+    @StatusResponse(401, "Não autenticado")
     @Body({
 
         id: "ID da Turma",
@@ -45,7 +48,7 @@ export default class FaculdadeController {
 
     })
 
-    @Put("/turmas")
+    @Put("/turmas", authMiddleware)
 
     async updateTurma(request: Request, response: Response): Promise<Response> {
         const { id, nome, semestre, id_disciplina } = request.body;
